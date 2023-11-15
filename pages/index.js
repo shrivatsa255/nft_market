@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { Banner, CreatorCard } from '../components';
+import { Banner, CreatorCard, NFTCard } from '../components';
 import img from '../assets';
 import { makeid } from '../Utils/makeid';
 
@@ -56,7 +56,7 @@ const Home = () => {
                     }}
                     className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 left-0 cursor-pointer"
                   >
-                    <Image src={img.left} layout="fill" objectFit="contain" alt="leftarrow" className={theme === 'light' && 'filter invert'} />
+                    <Image src={img.left} layout="fill" objectFit="contain" alt="leftarrow" className={theme === 'light' ? 'filter invert' : undefined} />
                   </div>
                   <div
                     onClick={() => {
@@ -64,11 +64,32 @@ const Home = () => {
                     }}
                     className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 right-0 cursor-pointer"
                   >
-                    <Image src={img.right} layout="fill" objectFit="contain" alt="rightarrow" className={theme === 'light' && 'filter invert'} />
+                    <Image src={img.right} layout="fill" objectFit="contain" alt="rightarrow" className={theme === 'light' ? 'filter invert' : undefined} />
                   </div>
                 </>
               )}
             </div>
+          </div>
+        </div>
+        <div className="mt-10">
+          <div className="flexBetween mx-4 xs:mx-0 minlg:mx-8 sm:flex-col sm:items-start">
+            <h1 className="flex-1 font-poppins dark:text-white text-nft-black-1 text-2xl minlg:text-4xl font-semibold sm:mb-4">Hot Bids</h1>
+            <div>searchbar</div>
+          </div>
+          <div className="mt-3 w-full flex flex-wrap justify-start md:justify-center">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+              <NFTCard
+                key={`nft-${i}`}
+                nft={{
+                  i,
+                  name: `Nifty NFT ${i}`,
+                  price: (10 - i * 0.534).toFixed(2),
+                  seller: `0x${makeid(3)}...${makeid(4)}`,
+                  owner: `0x${makeid(3)}...${makeid(4)}`,
+                  description: 'Cool NFT on sale',
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

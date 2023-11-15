@@ -101,7 +101,7 @@ const Navbar = () => {
             onClick={() => {
               setIsopen(false);
             }}
-            className={theme === 'light' && 'filter invert'}
+            className={theme === 'light' ? 'filter invert' : undefined}
           />
         ) : (
           <Image
@@ -113,7 +113,7 @@ const Navbar = () => {
             onClick={() => {
               setIsopen(true);
             }}
-            className={theme === 'light' && 'filter invert'}
+            className={theme === 'light' ? 'filter invert' : undefined}
           />
         )}
         {isOpen && (
