@@ -36,7 +36,7 @@ const createNFT = () => {
             <div {...getRootProps()} className={fileStyle}>
               <input {...getInputProps()} />
               <div className="flexCenter flex-col text-center">
-                <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-xl">JPG, PNG, GIF, SVG,WEBM Max 100mb.</p>
+                <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-xl">JPG, PNG, GIF, SVG,WEBM Max 100MB.</p>
                 <div className="my-12 w-full flex justify-center">
                   <Image src={img.upload} width={100} height={100} objectFit="contain" alt="file Upload" className={theme === 'light' ? 'filter invert' : undefined} />
                 </div>
