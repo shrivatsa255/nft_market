@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-
+import { NFTContext } from '../context/NFTContext';
 import { Button, Input } from '../components';
 import img from '../assets';
 
@@ -11,12 +11,15 @@ const createNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput, setFormInput] = useState({ price: '', name: '', description: '' });
   const { theme } = useTheme();
-  const onDrop = useCallback(() => {
-    // upload ipfs
+  const { uploadToIPFS } = useContext(NFTContext);
+  const onDrop = useCallback(async (acceptedFile) => {
+    const url = await uploadToIPFS(acceptedFile[0]);
+    setFileUrl(url);
+    console.log({ url });
   }, []);
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     onDrop,
-    accept: 'image/*',
+    accept: 'image/png',
     maxSize: 5000000,
   });
   const fileStyle = useMemo(
@@ -36,7 +39,7 @@ const createNFT = () => {
             <div {...getRootProps()} className={fileStyle}>
               <input {...getInputProps()} />
               <div className="flexCenter flex-col text-center">
-                <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-xl">JPG, PNG, GIF, SVG,WEBM Max 100MB.</p>
+                <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-xl">PNG 100MB.</p>
                 <div className="my-12 w-full flex justify-center">
                   <Image src={img.upload} width={100} height={100} objectFit="contain" alt="file Upload" className={theme === 'light' ? 'filter invert' : undefined} />
                 </div>
